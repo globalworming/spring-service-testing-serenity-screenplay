@@ -55,3 +55,23 @@ Using the @Autowired instance directly works, but does not show up in the BDD re
         
 ## workaround
 I was able to find a compromise between being DRY, readable tests and reporting on the steps using a proxy. By introducing a common interface `api.MyService` one can intercept the methods called and convert them to instrumented performables so the steps are reported. Also the connection to the actor is maintained well IMHO. See the example [ServiceTest](https://github.com/globalworming/spring-service-testing-serenity-screenplay/blob/master/src/test/java/com/example/demo/service/MyServiceImplTest.java), [UseTheService.as(actor).getService()](https://github.com/globalworming/spring-service-testing-serenity-screenplay/blob/master/src/test/java/com/example/demo/screenplay/abilities/UseTheService.java#L32) and [StepReportingProxy](https://github.com/globalworming/spring-service-testing-serenity-screenplay/blob/master/src/test/java/com/example/demo/screenplay/abilities/StepReportingProxy.java)
+
+    Test Suite Started: My service impl test
+    TEST NUMBER: 1
+    STARTING STEP client uses the service to authenticate client
+    FINISHING STEP
+    STARTING STEP client uses the service to logout client
+    FINISHING STEP
+    STARTING STEP Then answer if is authenticated should be (false)
+      STARTING STEP client uses the service to is authenticated client
+      FINISHING STEP
+    FINISHING STEP
+    TEST NUMBER: 2
+    STARTING STEP client uses the service to authenticate client
+    FINISHING STEP
+    STARTING STEP Then answer if is authenticated should be (true)
+        STARTING STEP client uses the service to is authenticated client
+        FINISHING STEP
+    FINISHING STEP
+    
+    
