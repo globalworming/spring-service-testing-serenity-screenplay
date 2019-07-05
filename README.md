@@ -2,7 +2,7 @@
 
 ## premise
 
-When testing spring boot applications with [serenity-bdd](http://www.thucydides.info/) I tried multiple approaches approaches, two in more details below.
+When testing spring boot applications with [serenity-bdd](http://www.thucydides.info/) I tried multiple approaches, three in more details below.
 
 Given is a pretty basic service with three business functions. The goal it to create a BDD report on the tests of these functions.
 
@@ -53,6 +53,5 @@ Using the @Autowired instance directly works, but does not show up in the BDD re
       }
     }
         
-
 ## workaround
-I was able to find a compromise between being DRY, readable tests and reporting on the steps using a proxy. By introducing a common interface `api.MyService` one can intercept the methods called and convert them to instrumented performables so the steps are reported. Also the connection to the actor is maintained well IMHO. See the example [ServiceTest], [UseTheService.as(actor).getService()] and [StepReportingProxy]
+I was able to find a compromise between being DRY, readable tests and reporting on the steps using a proxy. By introducing a common interface `api.MyService` one can intercept the methods called and convert them to instrumented performables so the steps are reported. Also the connection to the actor is maintained well IMHO. See the example [ServiceTest](https://github.com/globalworming/spring-service-testing-serenity-screenplay/blob/master/src/test/java/com/example/demo/service/MyServiceImplTest.java), [UseTheService.as(actor).getService()](https://github.com/globalworming/spring-service-testing-serenity-screenplay/blob/master/src/test/java/com/example/demo/screenplay/abilities/UseTheService.java#L32) and [StepReportingProxy](https://github.com/globalworming/spring-service-testing-serenity-screenplay/blob/master/src/test/java/com/example/demo/screenplay/abilities/StepReportingProxy.java)
