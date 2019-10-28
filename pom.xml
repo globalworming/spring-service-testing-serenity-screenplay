@@ -11,11 +11,9 @@
 	<groupId>com.example</groupId>
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>spring-service-testing-serenity-screenplay</name>
 
 	<properties>
-		<java.version>1.8</java.version>
 		<serenity.version>2.0.56</serenity.version>
 	</properties>
 
@@ -61,6 +59,12 @@
 			<version>${serenity.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd.maven.plugins</groupId>
+			<artifactId>serenity-maven-plugin</artifactId>
+			<version>${serenity.version}</version>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 
@@ -69,6 +73,31 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.20</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>net.serenity-bdd.maven.plugins</groupId>
+				<artifactId>serenity-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>serenity-reports</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>aggregate</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

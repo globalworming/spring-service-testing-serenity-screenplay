@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.screenplay.abilities.InstrumentedInterface;
 import com.example.demo.screenplay.abilities.UseTheService;
 import com.example.demo.screenplay.questions.IsAuthenticated;
 import com.example.demo.service.api.MyService;
@@ -21,7 +20,7 @@ import static org.hamcrest.core.Is.is;
 
 @RunWith(SerenityRunner.class)
 @SpringBootTest
-public class MyServiceImplTest {
+public class MyServiceImplIT {
 
   @Rule
   public SpringIntegrationMethodRule springIntegrationMethodRule = new SpringIntegrationMethodRule();
